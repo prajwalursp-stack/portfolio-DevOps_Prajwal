@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prajwal Urs | DevOps & Cloud Platform Engineer</title>
+  <meta name="description" content="Portfolio of Prajwal Urs - DevOps Engineer specializing in scalable CI/CD, container orchestration, automated quality gates, and infrastructure reliability." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      /* Dark Theme (Default) */
+      --bg-primary: #0a0f1d;
+      --bg-secondary: #111827;
+      --bg-tertiary: #1f2937;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.3);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-primary: #38bdf8;
+      --accent-secondary: #818cf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --badge-bg: rgba(56, 189, 248, 0.1);
+      --badge-text: #38bdf8;
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-accent: rgba(2, 132, 199, 0.3);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent-primary: #0284c7;
+      --accent-secondary: #6366f1;
+      --accent-glow: rgba(2, 132, 199, 0.1);
+      --badge-bg: rgba(2, 132, 199, 0.1);
+      --badge-text: #0284c7;
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+    html { scroll-behavior: smooth; font-family: var(--font-sans); }
+    body { background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    header { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); background-color: rgba(10, 15, 29, 0.85); border-bottom: 1px solid var(--border-color); }
+    [data-theme="light"] header { background-color: rgba(248, 250, 252, 0.85); }
+    nav { display: flex; justify-content: space-between; align-items: center; height: 72px; }
+    .logo { font-family: var(--font-mono); font-size: 1.15rem; font-weight: 700; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .logo span.bracket { color: var(--accent-primary); }
+    .nav-links { display: flex; align-items: center; list-style: none; gap: 28px; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-primary); }
+
+    .theme-toggle { background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; }
+    .theme-toggle:hover { border-color: var(--accent-primary); }
+
+    .hero { padding: 80px 0 50px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; background: var(--badge-bg); color: var(--badge-text); font-size: 0.85rem; font-weight: 600; font-family: var(--font-mono); margin-bottom: 20px; border: 1px solid var(--border-accent); }
+    .hero-badge .pulse { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .hero-title { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .hero-title .gradient-text { background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { font-size: 1.18rem; color: var(--text-secondary); max-width: 740px; margin-bottom: 32px; line-height: 1.7; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 48px; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer; border: none; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); color: #ffffff; box-shadow: 0 4px 14px var(--accent-glow); }
+    .btn-primary:hover { opacity: 0.95; transform: translateY(-2px); }
+    .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); }
+    .btn-secondary:hover { border-color: var(--accent-primary); color: var(--accent-primary); transform: translateY(-2px); }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 24px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; backdrop-filter: blur(8px); box-shadow: var(--shadow-md); margin-bottom: 70px; }
+    .stat-card { text-align: left; padding: 10px; }
+    .stat-number { font-size: 2.2rem; font-weight: 800; font-family: var(--font-mono); color: var(--accent-primary); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
+
+    .section-header { margin-bottom: 40px; }
+    .section-tag { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; display: block; }
+    .section-title { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.01em; }
+
+    .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: start; margin-bottom: 90px; }
+    .about-text p { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.75; }
+    .about-highlights { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 28px; }
+    .about-highlights h4 { font-size: 1.1rem; margin-bottom: 18px; color: var(--text-primary); }
+    .highlight-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
+    .highlight-icon { font-size: 1.25rem; line-height: 1; }
+    .highlight-desc { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.5; }
+    .highlight-desc strong { color: var(--text-primary); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-bottom: 90px; }
+    .project-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+    .project-card:hover { transform: translateY(-4px); border-color: var(--border-accent); box-shadow: var(--shadow-lg); }
+    .project-badge { align-self: flex-start; font-family: var(--font-mono); font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; background: var(--badge-bg); color: var(--badge-text); font-weight: 600; margin-bottom: 16px; }
+    .project-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: var(--text-primary); }
+    .project-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+    .project-meta-box { background: var(--bg-tertiary); border-radius: 10px; padding: 14px; margin-bottom: 20px; border-left: 3px solid var(--accent-primary); }
+    .meta-row { font-size: 0.85rem; margin-bottom: 6px; color: var(--text-secondary); line-height: 1.5; }
+    .meta-row:last-child { margin-bottom: 0; }
+    .meta-row strong { color: var(--text-primary); }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tag { font-family: var(--font-mono); font-size: 0.78rem; background: var(--bg-tertiary); color: var(--text-secondary); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border-color); }
+    .project-links { display: flex; align-items: center; gap: 16px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); }
+    .project-link { font-size: 0.9rem; font-weight: 600; color: var(--accent-primary); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+    .project-link:hover { text-decoration: underline; }
+
+    .skills-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 90px; }
+    .skill-category { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 24px; }
+    .skill-cat-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; color: var(--text-primary); }
+    .skill-pill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-pill { font-size: 0.85rem; padding: 6px 12px; border-radius: 6px; background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border-color); font-weight: 500; }
+    .skill-pill.featured { background: var(--badge-bg); color: var(--badge-text); border-color: var(--border-accent); font-weight: 600; }
+
+    .timeline { position: relative; border-left: 2px solid var(--border-color); padding-left: 28px; margin-left: 12px; margin-bottom: 90px; }
+    .timeline-item { position: relative; }
+    .timeline-dot { position: absolute; left: -35px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-primary); box-shadow: 0 0 0 4px var(--bg-primary); }
+    .timeline-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 6px; }
+    .timeline-role { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+    .timeline-company { font-size: 1rem; color: var(--text-secondary); margin-bottom: 14px; font-weight: 500; }
+    .timeline-points { list-style-type: none; }
+    .timeline-points li { position: relative; padding-left: 20px; margin-bottom: 10px; color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+    .timeline-points li::before { content: '▹'; position: absolute; left: 0; color: var(--accent-primary); }
+
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 90px; }
+    .card-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 28px; }
+    .card-box h3 { font-size: 1.2rem; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; color: var(--text-primary); }
+    .award-item { margin-bottom: 16px; }
+    .award-item:last-child { margin-bottom: 0; }
+    .award-title { font-size: 0.98rem; font-weight: 600; color: var(--text-primary); }
+    .award-desc { font-size: 0.88rem; color: var(--text-secondary); }
+
+    .contact-card { background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(129, 140, 248, 0.05)); border: 1px solid var(--border-accent); border-radius: 20px; padding: 48px; text-align: center; margin-bottom: 80px; }
+    .contact-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 16px; }
+    .contact-sub { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto 32px; }
+    .contact-info-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 32px; }
+    .contact-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .contact-pill:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+    footer { border-top: 1px solid var(--border-color); padding: 32px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid, .grid-2col { grid-template-columns: 1fr; }
+      .contact-card { padding: 32px 20px; }
+      .hero-title { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">
+          <span class="bracket">&lt;</span>prajwal.urs<span class="bracket"> /&gt;</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+          <span id="themeIcon">☀️</span>
+          <span id="themeText">Light</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-badge">
+        <span class="pulse"></span>
+        <span>Available for DevOps & Platform Engineering Roles</span>
+      </div>
+      <h1 class="hero-title">
+        Hi, I'm <span class="gradient-text">Prajwal Urs</span>.<br />
+        Building Resilient CI/CD & Automated Cloud Infrastructure.
+      </h1>
+      <p class="hero-desc">
+        DevOps Engineer with 4.8 years of expertise architecting high-velocity CI/CD pipelines, container orchestration, shift-left quality gates, and self-healing deployment infrastructure for enterprise platforms.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">Explore Featured Work &rarr;</a>
+        <a href="mailto:prajwalursp@gmail.com" class="btn btn-secondary">Get in Touch</a>
+        <a href="https://linkedin.com/in/prajwalurs" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn Profile</a>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">4.8+</div>
+          <div class="stat-label">Years of DevOps Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">60%</div>
+          <div class="stat-label">Reduction in Release Friction</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Automated Quality Gates Synced</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2x</div>
+          <div class="stat-label">Excellence & Quality Awards</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="scroll-margin-top: 100px;">
+      <div class="section-header">
+        <span class="section-tag">About Me</span>
+        <h2 class="section-title">Engineering Resilient, Low-Friction Delivery</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I am a DevOps Engineer based in Bengaluru, India, with a deep dedication to continuous automation, site reliability, and bridging the gap between developers and operations. Having started with strong software quality foundations, I transitioned into core DevOps and Cloud Infrastructure, bringing a test-first, shift-left mindset to modern delivery pipelines.
+          </p>
+          <p>
+            Over the past 4.8 years, I have architected and scaled end-to-end continuous delivery ecosystems for enterprise clients like <strong>Claritev Healthcare Technologies</strong> through Quality-AI. My day-to-day focus centers on eliminating deployment friction: creating standardized Jenkins Groovy shared libraries, setting up one-click Kubernetes manifest releases, and engineering instant auto-rollback mechanisms that guarantee 99.9% release safety.
+          </p>
+          <p>
+            <strong>Core Engineering Philosophy:</strong> <em>"Every manual step is an incident waiting to happen. Build pipelines that treat infrastructure as reproducible code, shift security and test validation left, and make production deployments boring and fail-safe."</em>
+          </p>
+        </div>
+        <div class="about-highlights">
+          <h4>Key Principles & Competencies</h4>
+          <div class="highlight-item">
+            <span class="highlight-icon">⚡</span>
+            <div class="highlight-desc">
+              <strong>One-Click Deployments:</strong> Eliminating manual intervention with automated health probes and manifest deployments.
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon">🛡️</span>
+            <div class="highlight-desc">
+              <strong>Fail-Safe Rollbacks:</strong> Automatic canary evaluation and rollback mechanisms to neutralize bad releases within seconds.
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon">🔍</span>
+            <div class="highlight-desc">
+              <strong>Shift-Left Quality & Security:</strong> Integrating SonarQube, Checkmarx, Snyk, and automated testing (Playwright, TestNG) into gate criteria.
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon">📋</span>
+            <div class="highlight-desc">
+              <strong>Enterprise Governance:</strong> Automated ServiceNow Change Request (CR) lifecycle integration inside pipelines.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="scroll-margin-top: 100px;">
+      <div class="section-header">
+        <span class="section-tag">Featured Work</span>
+        <h2 class="section-title">Production Case Studies & Infrastructure</h2>
+      </div>
+      <div class="projects-grid">
+        
+        <!-- Case Study 1 -->
+        <article class="project-card">
+          <div>
+            <span class="project-badge">CI/CD & Architecture</span>
+            <h3 class="project-title">Enterprise CI/CD Pipelines & Groovy Shared Libraries</h3>
+            <p class="project-desc">
+              Architected and standardized enterprise pipeline templates across multiple microservices, replacing fragmented inline Jenkinsfiles with reusable, governance-backed Groovy shared libraries.
+            </p>
+            <div class="project-meta-box">
+              <div class="meta-row"><strong>Problem:</strong> Inconsistent deployment configurations, brittle build steps, and duplicated scripts across microservices.</div>
+              <div class="meta-row"><strong>Solution:</strong> Built modular Groovy libraries with plug-and-play stages for SAST, container builds, and governance gates.</div>
+              <div class="meta-row"><strong>Impact:</strong> Cut service pipeline onboarding from days to 15 minutes; awarded Quality-AI "Code Quality Champion".</div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Jenkins</span>
+              <span class="tag">Groovy</span>
+              <span class="tag">Docker</span>
+              <span class="tag">SonarQube</span>
+              <span class="tag">Git</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/prajwalurs" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Case Study 2 -->
+        <article class="project-card">
+          <div>
+            <span class="project-badge">Reliability & Orchestration</span>
+            <h3 class="project-title">One-Click Kubernetes Manifest Deploy & Auto-Rollback Engine</h3>
+            <p class="project-desc">
+              Engineered robust manifest deployment automation with real-time health-check telemetry that automatically reverts faulty releases without human delay.
+            </p>
+            <div class="project-meta-box">
+              <div class="meta-row"><strong>Problem:</strong> Manual release handoffs during high-traffic windows risked prolonged service degradation upon deployment failures.</div>
+              <div class="meta-row"><strong>Solution:</strong> Automated declarative manifest updates with integrated canary probes and instant auto-rollback triggers.</div>
+              <div class="meta-row"><strong>Impact:</strong> Slashed MTTR on failed releases from ~25 minutes to &lt;30 seconds; recognized for "Operational Excellence".</div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Kubernetes</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Shell Scripting</span>
+              <span class="tag">Prometheus</span>
+              <span class="tag">OCI</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/prajwalurs" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Case Study 3 -->
+        <article class="project-card">
+          <div>
+            <span class="project-badge">Shift-Left Quality</span>
+            <h3 class="project-title">Multi-Framework Automated Testing Pipeline Integration</h3>
+            <p class="project-desc">
+              Synthesized dynamic automated testing gates into continuous delivery workflows, seamlessly triggering Playwright, TestNG, and Cucumber test suites post-deployment.
+            </p>
+            <div class="project-meta-box">
+              <div class="meta-row"><strong>Problem:</strong> Late defect detection and manual validation cycles created release schedule bottlenecks.</div>
+              <div class="meta-row"><strong>Solution:</strong> Embedded automated smoke and regression gates into pipeline stages, synchronizing pass/fail metrics with promotion gates.</div>
+              <div class="meta-row"><strong>Impact:</strong> Prevented high-severity defects from reaching staging/production environments with 100% automated gate compliance.</div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Playwright</span>
+              <span class="tag">TestNG</span>
+              <span class="tag">Cucumber</span>
+              <span class="tag">GitLab CI</span>
+              <span class="tag">Maven</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/prajwalurs" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Case Study 4 -->
+        <article class="project-card">
+          <div>
+            <span class="project-badge">Governance & Compliance</span>
+            <h3 class="project-title">Automated ServiceNow Change Request (CR) Release Pipeline</h3>
+            <p class="project-desc">
+              Built complete API-driven integration between continuous delivery pipelines and enterprise ITIL governance tools, automating Change Request lifecycle verification.
+            </p>
+            <div class="project-meta-box">
+              <div class="meta-row"><strong>Problem:</strong> Manual creation, tracking, and sign-offs of ServiceNow CRs added hours of administrative overhead per release.</div>
+              <div class="meta-row"><strong>Solution:</strong> Automated CR drafting, validation of CAB approval state, commit traceability, and automated closure post-deployment.</div>
+              <div class="meta-row"><strong>Impact:</strong> Eliminated 4 hours of manual audit tracking per release window while achieving 100% regulatory compliance.</div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">ServiceNow API</span>
+              <span class="tag">Jenkins</span>
+              <span class="tag">Groovy</span>
+              <span class="tag">REST APIs</span>
+              <span class="tag">Jira</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/prajwalurs" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" style="scroll-margin-top: 100px;">
+      <div class="section-header">
+        <span class="section-tag">Technical Arsenal</span>
+        <h2 class="section-title">Skills & Tooling Ecosystem</h2>
+      </div>
+      <div class="skills-wrapper">
+        
+        <div class="skill-category">
+          <h3 class="skill-cat-title"><span>⚙️</span> CI/CD & Automation</h3>
+          <div class="skill-pill-list">
+            <span class="skill-pill featured">Jenkins</span>
+            <span class="skill-pill featured">Groovy Shared Libraries</span>
+            <span class="skill-pill featured">GitLab CI</span>
+            <span class="skill-pill">One-Click Deployments</span>
+            <span class="skill-pill">Auto-Rollback Engines</span>
+            <span class="skill-pill">Maven & Gradle</span>
+            <span class="skill-pill">MSBuild</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="skill-cat-title"><span>🐳</span> Containers & Cloud</h3>
+          <div class="skill-pill-list">
+            <span class="skill-pill featured">Docker</span>
+            <span class="skill-pill featured">Kubernetes (K8s)</span>
+            <span class="skill-pill featured">OCI (Oracle Cloud)</span>
+            <span class="skill-pill">AWS (Basics)</span>
+            <span class="skill-pill">Azure (Basics)</span>
+            <span class="skill-pill">Manifest Deployments</span>
+            <span class="skill-pill">Linux Administration</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="skill-cat-title"><span>🛡️</span> Security & Quality Gates</h3>
+          <div class="skill-pill-list">
+            <span class="skill-pill featured">SonarQube</span>
+            <span class="skill-pill featured">Checkmarx</span>
+            <span class="skill-pill featured">Snyk</span>
+            <span class="skill-pill">Sonatype Xray</span>
+            <span class="skill-pill">Quality Gate Syncing</span>
+            <span class="skill-pill">Dependency Scanning</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="skill-cat-title"><span>📊</span> Observability & Reliability</h3>
+          <div class="skill-pill-list">
+            <span class="skill-pill featured">Prometheus</span>
+            <span class="skill-pill featured">Grafana</span>
+            <span class="skill-pill">Application Log RCA</span>
+            <span class="skill-pill">Incident Troubleshooting</span>
+            <span class="skill-pill">System Optimization</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="skill-cat-title"><span>📜</span> Scripting & Version Control</h3>
+          <div class="skill-pill-list">
+            <span class="skill-pill featured">Groovy</span>
+            <span class="skill-pill featured">Shell / Bash</span>
+            <span class="skill-pill featured">Git & GitHub</span>
+            <span class="skill-pill">BitBucket</span>
+            <span class="skill-pill">Ansible</span>
+            <span class="skill-pill">Terraform (Foundations)</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="skill-cat-title"><span>🧪</span> Test Automation & Governance</h3>
+          <div class="skill-pill-list">
+            <span class="skill-pill featured">Playwright</span>
+            <span class="skill-pill featured">TestNG</span>
+            <span class="skill-pill">Cucumber</span>
+            <span class="skill-pill">Pytest</span>
+            <span class="skill-pill">Reqnroll & SpecFlow</span>
+            <span class="skill-pill">ServiceNow</span>
+            <span class="skill-pill">Jira & Agile / Scrum</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" style="scroll-margin-top: 100px;">
+      <div class="section-header">
+        <span class="section-tag">Experience</span>
+        <h2 class="section-title">Career Trajectory</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2021 — PRESENT</div>
+          <h3 class="timeline-role">DevOps Engineer</h3>
+          <div class="timeline-company">Quality-AI (Client: Claritev Healthcare Technologies) &bull; Bengaluru, India</div>
+          <ul class="timeline-points">
+            <li>Architected and scaled comprehensive CI/CD pipelines across core microservices, drastically lowering deployment friction and boosting release velocity.</li>
+            <li>Engineered centralized, reusable Jenkins Groovy shared libraries to standardize deployment, security, and governance policies across multiple engineering teams.</li>
+            <li>Pioneered one-click manifest deployment mechanisms and automated instant rollback capabilities to safeguard service uptime during high-frequency production releases.</li>
+            <li>Automated enterprise IT governance by integrating ServiceNow Change Request creation, CAB status validation, and automated ticket resolution directly into pipeline hooks.</li>
+            <li>Shifted quality left by integrating Playwright, TestNG, Cucumber, and Reqnroll/SpecFlow automation frameworks into continuous delivery gates.</li>
+            <li>Proactively monitored staging and production application logs using Prometheus and Grafana, executing deep root-cause analysis (RCA) to eliminate system bottlenecks.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recognitions & Education -->
+    <section class="grid-2col">
+      <div class="card-box">
+        <h3><span>🏆</span> Awards & Recognition</h3>
+        <div class="award-item">
+          <div class="award-title">Operational Excellence Award — Quality-AI</div>
+          <div class="award-desc">Awarded for spearheading seamless infrastructure migration and zero-downtime deployment during a mission-critical, high-traffic product launch.</div>
+        </div>
+        <div style="height: 16px;"></div>
+        <div class="award-item">
+          <div class="award-title">Code Quality Champion Award — Quality-AI</div>
+          <div class="award-desc">Honored for exceptional technical leadership and ownership of centralized Groovy shared libraries, setting strict quality and reusability standards.</div>
+        </div>
+        <div style="height: 16px;"></div>
+        <div class="award-item">
+          <div class="award-title">DevOps Mentorship & Community</div>
+          <div class="award-desc">Mentored junior engineers on containerization best practices, CI/CD patterns, and cloud-native reliability patterns.</div>
+        </div>
+      </div>
+
+      <div class="card-box">
+        <h3><span>🎓</span> Certifications & Education</h3>
+        <div class="award-item">
+          <div class="award-title">OCI DevOps Professional</div>
+          <div class="award-desc">Oracle Cloud Infrastructure: Infrastructure automation, monitoring, telemetry, and cloud-native delivery pipelines.</div>
+        </div>
+        <div style="height: 16px;"></div>
+        <div class="award-item">
+          <div class="award-title">DevOps Engineer Program — Quality-AI India</div>
+          <div class="award-desc">Specialized intensive program on CI/CD architecture, container orchestration, and automated delivery.</div>
+        </div>
+        <div style="height: 16px;"></div>
+        <div class="award-item">
+          <div class="award-title">Bachelor of Technology (B.Tech)</div>
+          <div class="award-desc">K S Institute of Technology (VTU), Bengaluru &bull; 2016 – 2020</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="scroll-margin-top: 100px;">
+      <div class="contact-card">
+        <h2 class="contact-title">Let's Connect</h2>
+        <p class="contact-sub">
+          Interested in discussing scalable CI/CD pipelines, container orchestration, or cloud infrastructure reliability? My inbox is always open.
+        </p>
+        <div class="contact-info-pills">
+          <a href="mailto:prajwalursp@gmail.com" class="contact-pill">✉️ prajwalursp@gmail.com</a>
+          <a href="tel:+919739431491" class="contact-pill">📞 +91-9739431491</a>
+          <a href="https://linkedin.com/in/prajwalurs" target="_blank" rel="noopener" class="contact-pill">🔗 linkedin.com/in/prajwalurs</a>
+          <span class="contact-pill">📍 Bengaluru, India</span>
+        </div>
+        <a href="mailto:prajwalursp@gmail.com?subject=DevOps%20Engineering%20Opportunity" class="btn btn-primary">
+          Send Direct Email
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Prajwal Urs &bull; Designed for High Availability & Low Friction &bull; Deployed via GitHub Actions</p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle with localStorage persistence
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+    const htmlEl = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      if (theme === 'dark') {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light';
+      } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark';
+      }
+    }
+
+    applyTheme(initialTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Scroll active link update
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 140;
+        if (window.pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
